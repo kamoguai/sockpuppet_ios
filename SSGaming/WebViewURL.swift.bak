@@ -1,0 +1,36 @@
+//
+//  WebViewURL.swift
+//  WebApp
+//
+//  Created by GMCD on 2022/7/28.
+//  Copyright © 2022 GMCD. All rights reserved.
+//
+
+import UIKit
+
+struct WebViewURL {
+    
+    private(set) var route:Route
+    
+    var url:String { "https://" + route.rawValue }
+    
+    init(_ route: WebViewURL.Route) {
+        self.route = route
+    }
+    
+    struct Route:RawRepresentable, Hashable {
+        
+        let rawValue:String
+        
+        init(rawValue: String) {
+            self.rawValue = rawValue
+        }
+    }
+}
+
+
+extension WebViewURL.Route {
+    static let domain = WebViewURL.Route(rawValue: "docs.swift.org/")
+}
+
+
