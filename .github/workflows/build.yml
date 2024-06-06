@@ -16,16 +16,6 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v2
 
-    - name: Set up Ruby
-      uses: ruby/setup-ruby@v1
-      with:
-        ruby-version: 2.7
-
-    - name: Install dependencies
-      run: |
-        gem install bundler -v 2.4.22
-        bundle install
-
     - name: Decode and configure certificates
       run: |
         echo "${{ secrets.PRIVATE_KEY }}" | base64 --decode > private_key.p8
