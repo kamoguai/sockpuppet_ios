@@ -1,0 +1,57 @@
+name: iOS Build
+
+on:
+  push:
+    branches:
+      - main # 當推送到 main 分支時觸發
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: macos-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: 2.7
+
+    - name: Install dependencies
+      run: |
+        gem install bundler
+        bundle install
+
+    - name: Set up Xcode
+      run: |
+        sudo xcode-select -s /Applications/Xcode_15.4.app
+        sudo xcodebuild -license accept
+
+    - name: Install CocoaPods
+      run: bundle exec pod install
+      working-directory: ./SSGaming
+
+    - name: Build IPA
+      run: |
+        xcodebuild clean archive \
+          -project SSGaming.xcodeproj \
+          -scheme YourScheme \
+          -archivePath $GITHUB_WORKSPACE/build/SSGaming.xcarchive \
+          -configuration Release \
+          -allowProvisioningUpdates
+
+        xcodebuild -exportArchive \
+          -archivePath $GITHUB_WORKSPACE/build/SSGaming.xcarchive \
+          -exportPath $GITHUB_WORKSPACE/build/ \
+          -exportOptionsPlist ./SSGaming/exportOptions.plist
+      working-directory: ./SSGaming
+
+    - name: Upload artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: ipa
+        path: $GITHUB_WORKSPACE/build/*.ipa
