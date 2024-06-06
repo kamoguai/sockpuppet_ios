@@ -32,7 +32,8 @@ jobs:
         bundle-id: com.webapp.testBuild
         issuer-id: ${{ secrets.ISSUER_ID }}
         api-key-id: ${{ secrets.KEY_ID }}
-
+        api-private-key: ${{ secrets.PRIVATE_KEY }}
+        
     - name: 'Another example step'
       run: echo ${{ steps.provisioning.outputs.profiles }}
 
