@@ -30,6 +30,7 @@
 		35A7DD2E2B3AC40900E6ECB2 /* URLSessionConfiguration+HttpProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35A7DD2D2B3AC40900E6ECB2 /* URLSessionConfiguration+HttpProxy.swift */; };
 		35A7DD332B3AC61100E6ECB2 /* NSURLRequest+ProxyCanonicalRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 35A7DD302B3AC61100E6ECB2 /* NSURLRequest+ProxyCanonicalRequest.m */; };
 		35A7DD392B3AD09C00E6ECB2 /* ------ Config ------.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35A7DD382B3AD09C00E6ECB2 /* ------ Config ------.swift */; };
+		47BB1A71D3B3D37734EF9D6C /* Pods_SSGaming.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D843F99FBE6DEDD73B4D9439 /* Pods_SSGaming.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -51,6 +52,8 @@
 		0CA05F422892778800F2F552 /* JSEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSEvent.swift; sourceTree = "<group>"; };
 		0CA05F442892821200F2F552 /* WebViewURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewURL.swift; sourceTree = "<group>"; };
 		0CB571FE28A0EBB600D48F5F /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
+		16674EE17570DF97C1A5CE78 /* Pods-SSGaming.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SSGaming.debug.xcconfig"; path = "Target Support Files/Pods-SSGaming/Pods-SSGaming.debug.xcconfig"; sourceTree = "<group>"; };
+		1B385204D5D67B5C839AB042 /* Pods-SSGaming.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SSGaming.release.xcconfig"; path = "Target Support Files/Pods-SSGaming/Pods-SSGaming.release.xcconfig"; sourceTree = "<group>"; };
 		35A7DD272B3AC30700E6ECB2 /* HttpProxyHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpProxyHandler.swift; sourceTree = "<group>"; };
 		35A7DD292B3AC3CA00E6ECB2 /* HttpProxySession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpProxySession.swift; sourceTree = "<group>"; };
 		35A7DD2B2B3AC3E700E6ECB2 /* HttpProxyProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpProxyProtocol.swift; sourceTree = "<group>"; };
@@ -59,6 +62,7 @@
 		35A7DD312B3AC61100E6ECB2 /* SSGaming-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SSGaming-Bridging-Header.h"; sourceTree = "<group>"; };
 		35A7DD322B3AC61100E6ECB2 /* NSURLRequest+ProxyCanonicalRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURLRequest+ProxyCanonicalRequest.h"; sourceTree = "<group>"; };
 		35A7DD382B3AD09C00E6ECB2 /* ------ Config ------.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "------ Config ------.swift"; sourceTree = "<group>"; };
+		D843F99FBE6DEDD73B4D9439 /* Pods_SSGaming.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SSGaming.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +71,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0CB571FD28A0EAD600D48F5F /* MBProgressHUD in Frameworks */,
+				47BB1A71D3B3D37734EF9D6C /* Pods_SSGaming.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,6 +83,8 @@
 			children = (
 				0C6C1ACB25CB86C400FF03E5 /* SSGaming */,
 				0C6C1ACA25CB86C400FF03E5 /* Products */,
+				1661AB93AEFA0EAFB0FE66BD /* Pods */,
+				5A36826B870A325D92B366F4 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -121,6 +128,23 @@
 			path = SSGaming;
 			sourceTree = "<group>";
 		};
+		1661AB93AEFA0EAFB0FE66BD /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				16674EE17570DF97C1A5CE78 /* Pods-SSGaming.debug.xcconfig */,
+				1B385204D5D67B5C839AB042 /* Pods-SSGaming.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		5A36826B870A325D92B366F4 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D843F99FBE6DEDD73B4D9439 /* Pods_SSGaming.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -128,6 +152,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0C6C1ADD25CB86C700FF03E5 /* Build configuration list for PBXNativeTarget "SSGaming" */;
 			buildPhases = (
+				73D4F20340662D23661793EF /* [CP] Check Pods Manifest.lock */,
 				0C6C1AC525CB86C400FF03E5 /* Sources */,
 				0C6C1AC625CB86C400FF03E5 /* Frameworks */,
 				0C6C1AC725CB86C400FF03E5 /* Resources */,
@@ -195,6 +220,31 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		73D4F20340662D23661793EF /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-SSGaming-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		0C6C1AC525CB86C400FF03E5 /* Sources */ = {
@@ -353,13 +403,16 @@
 		};
 		0C6C1ADE25CB86C700FF03E5 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 16674EE17570DF97C1A5CE78 /* Pods-SSGaming.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = Q8C88B8UL7;
+				CODE_SIGN_IDENTITY = "Apple Development: TUNG WEI YANG (FN968N2HFT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Development: TUNG WEI YANG (FN968N2HFT)";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 2406131307;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = Q8C88B8UL7;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = SSGaming/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
@@ -371,23 +424,28 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.webapp.testBuild;
 				PRODUCT_NAME = SSGaming;
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "match Development com.webapp.testBuild";
 				SWIFT_OBJC_BRIDGING_HEADER = "SSGaming/SSGaming-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
+				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
 		};
 		0C6C1ADF25CB86C700FF03E5 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1B385204D5D67B5C839AB042 /* Pods-SSGaming.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: TUNG WEI YANG (Q8C88B8UL7)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: TUNG WEI YANG (Q8C88B8UL7)";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 2406131307;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = Q8C88B8UL7;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = Q8C88B8UL7;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = SSGaming/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
@@ -399,9 +457,11 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.webapp.testBuild;
 				PRODUCT_NAME = SSGaming;
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "match AppStore com.webapp.testBuild";
 				SWIFT_OBJC_BRIDGING_HEADER = "SSGaming/SSGaming-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
+				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
 		};

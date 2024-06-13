@@ -1,0 +1,29 @@
+{
+  "configurations" : [
+    {
+      "id" : "3324A79A-D010-47B9-90FB-A15FB58D7E92",
+      "name" : "Configuration 1",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "codeCoverage" : false,
+    "environmentVariableEntries" : [
+      {
+        "key" : "OS_ACTIVITY_MODE",
+        "value" : "disable"
+      }
+    ],
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:SSGaming.xcodeproj",
+      "identifier" : "0C6C1AC825CB86C400FF03E5",
+      "name" : "SSGaming"
+    }
+  },
+  "testTargets" : [
+
+  ],
+  "version" : 1
+}

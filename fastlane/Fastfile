@@ -1,0 +1,173 @@
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+# For a list of all available plugins, check out
+#
+#     https://docs.fastlane.tools/plugins/available-plugins
+#
+
+# Uncomment the line if you want fastlane to automatically update itself
+# update_fastlane
+
+default_platform(:ios)
+
+api_key = app_store_connect_api_key(
+  key_id: ENV['APP_STORE_CONNECT_API_KEY_ID'],
+  issuer_id: ENV['APP_STORE_CONNECT_API_ISSUER_ID'],
+  key_filepath: ENV['API_KEY_PATH'],
+)
+
+platform :ios do
+  desc "Push a new beta build to TestFlight"
+  lane :beta do
+    increment_build_number(xcodeproj: "SSGaming.xcodeproj")
+    build_app(workspace: "SSGaming.xcworkspace", scheme: "SSGaming")
+    upload_to_testflight
+  end
+
+  desc "dowload certificates from the git"
+  lane :syncCertificates do
+    match(
+       api_key: api_key,
+       type: "development",
+       git_basic_authorization: Base64.strict_encode64(ENV["GIT_AUTHORIZATION"]),
+       keychain_password: ENV["MATCH_PASSWORD"]
+       )
+  end
+
+  desc "Connect App Store connect by API"
+  lane :connectByAPI do
+    app_store_connect_api_key(
+      key_id: ENV['APP_STORE_CONNECT_API_KEY_ID'],
+      issuer_id: ENV['APP_STORE_CONNECT_API_ISSUER_ID'],
+      key_filepath: ENV['API_KEY_PATH'],
+    )
+  end
+
+  desc "Build and archive APP"
+  lane :archive do
+    # update_code_signing_settings(
+    #   path: "#{ENV['SCHEME']}.xcodeproj",
+    #   team_id:ENV["DEVELOPER_PORTAL_TEAM_ID"],
+    #   targets: ENV["SCHEME"],
+    #   code_sign_identity: ENV["APP_DISTRIBUTION"],
+    #   profile_name: "#{profileName}",
+    #   bundle_identifier: ENV["APP_IDENTIFIER"]
+    # )
+
+    build_app(
+      workspace: "#{ENV['SCHEME']}.xcworkspace",
+      scheme: ENV["SCHEME"],
+      export_method: "development",
+      clean: true,
+      output_directory: './build',
+      output_name: "#{fileName}",
+      # xcargs: 'DEBUG_INFORMATION_FORMAT=dwarf-with-dsym'
+
+    )
+  end
+
+  private_lane :profileName do
+    "#{ENV['BUNDLE_ID']} AppStore"
+  end
+  private_lane :fileName do
+    versionNumber = get_version_number(target: ENV["SCHEME"])
+    "#{ENV["SCHEME"]}_#{versionNumber}.ipa"
+  end
+
+  desc "Update Bundle Name and App Name"
+  lane :update_names do |options|
+    plist_path = "/Users/kamoguai/Desktop/馬甲文件/sockpuppet-ios/SSGaming/Info.plist"
+    proj_path = "/Users/kamoguai/Desktop/馬甲文件/sockpuppet-ios/SSGaming.xcodeproj"
+    # bundle_name = options[:bundle_name]
+    app_name = options[:app_name]
+    bundle_identifier = options[:bundle_identifier]
+
+    # 使用PlistBuddy更新Info.plist
+    # sh "/usr/libexec/PlistBuddy -c \"Set :CFBundleName #{bundle_name}\" #{plist_path}"
+    sh "/usr/libexec/PlistBuddy -c \"Set :CFBundleDisplayName #{app_name}\" #{plist_path}"
+    # sh "/usr/libexec/PlistBuddy -c \"Set :CFBundleIdentifier #{bundle_identifier}\" #{plist_path}"
+    # 使用 sed 修改 project.pbxproj 文件中的 Bundle Identifier
+    sh "sed -i '' 's/PRODUCT_BUNDLE_IDENTIFIER = com.webapp.testBuild;/PRODUCT_BUNDLE_IDENTIFIER = #{bundle_identifier};/' #{proj_path}/project.pbxproj"
+
+    # 打印修改后的 Bundle Identifier 确认
+    sh "grep -A 1 'PRODUCT_BUNDLE_IDENTIFIER' #{proj_path}/project.pbxproj"#{proj_path}/project.pbxproj
+  end
+
+  desc "Deploy to TestFlight with updated names and icons"
+  lane :gama do |options|
+    # 更新名稱
+    update_names(bundle_name: options[:bundle_name], app_name: options[:app_name], bundle_identifier: options[:bundle_identifier])
+  end
+
+  # =======================================
+  # ======= Download Certificates =========
+  # =======================================
+
+  desc "Download Development Certificates And Profiles"
+  lane :download_development_certificates do
+    match_for_all(account_type: "development", readonly: true)
+  end
+
+  desc "Download Distribution Certificates And Profiles"
+  #readonly 為 false 會建立新的憑證，true 則不會
+  lane :download_distribution_certificates do
+    match_for_all(account_type: "appstore", readonly: true)
+  end
+
+  private_lane :match_for_all do |options|
+    account_type = options[:account_type]
+    readonly = options[:readonly]
+    # force_for_new_devices => 有新裝置時會重新生成 provisioning profile
+    match(type: account_type,
+    force_for_new_devices: true,
+    readonly: readonly)
+  end
+  # =======================================
+  # ======= Build ipa to local file =======
+  # =======================================
+   lane :dev_beta do
+  	# 透過 match 同步憑證
+    	download_development_certificates
+  	# 透過 gym 打包 ipa
+   	build(build_type: 'development', ipa_name: 'DEV')
+    	# 在 macOS 通知欄發送通知
+   	notification(subtitle: "打包完成", message: "已經打包在本地了")
+   end
+
+   lane :release_beta do
+  	download_distribution_certificates
+  	build(build_type: 'app-store', ipa_name: 'Release')
+   end
+
+   private_lane :build do |options|
+  	build_number = Time.new.strftime("%y%m%d%H%M")
+  	build_type = options[:build_type]
+  	ipa_name = ENV["SCHEME"] + "-" + options[:ipa_name]
+  	configure = build_type == 'development' ? 'Debug': 'Release'
+
+  	puts "app build 🏄🏄🏄"
+  	puts "build_type: " + build_type
+  	puts "build_number: " + build_number
+  	puts "ipa_name: " + ipa_name
+
+  	increment_build_number(build_number: build_number)
+  	gym(clean: true,
+  		configuration: configure,
+  		scheme: ENV["SCHEME"],
+  		export_method: build_type,
+  		output_directory: ENV["EXPORT_OUTPUT_DIRECTORY"],#ipa輸出位置
+  		output_name: ipa_name,#ipa名稱
+          silent:true#隱藏沒有必要的資訊
+          )
+
+   end
+
+
+
+
+end

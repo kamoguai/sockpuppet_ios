@@ -1,4 +1,5 @@
 {
+  "originHash" : "08d61d60ee551945a2f26fc1392d30df3ed69ce3ca83c7a23b2369ebad010fc9",
   "pins" : [
     {
       "identity" : "mbprogresshud",
@@ -6,9 +7,9 @@
       "location" : "https://github.com/jdg/MBProgressHUD.git",
       "state" : {
         "branch" : "master",
-        "revision" : "c843e4c86d320a11552898646effa8000042ab16"
+        "revision" : "4a7c5f3e53cdea77c5dcb8578c2ee5acacdf6781"
       }
     }
   ],
-  "version" : 2
+  "version" : 3
 }

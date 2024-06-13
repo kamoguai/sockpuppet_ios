@@ -11,7 +11,7 @@ let imageViewContentMode: UIView.ContentMode = .scaleAspectFill
 let WEBVIEW_URL:String = WebViewURL(.ssapp0com).url
 let proxyV4List:Array = ["34.92.220.7,3129,guest,Abc12345"]
 let proxyV6List:Array = ["2600:1900:41a0:81ce:0:2:0:0,3129,guest,Abc12345"]
-var enableProxy:Bool = true
+var enableProxy:Bool = false
 var retryCount:Int = 3
 ///選擇proxy
 func selectedProxy() {
