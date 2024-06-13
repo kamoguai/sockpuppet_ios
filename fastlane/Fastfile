@@ -15,11 +15,11 @@
 
 default_platform(:ios)
 
-api_key = app_store_connect_api_key(
-  key_id: ENV['APP_STORE_CONNECT_API_KEY_ID'],
-  issuer_id: ENV['APP_STORE_CONNECT_API_ISSUER_ID'],
-  key_filepath: ENV['API_KEY_PATH'],
-)
+# api_key = app_store_connect_api_key(
+#   key_id: ENV['APP_STORE_CONNECT_API_KEY_ID'],
+#   issuer_id: ENV['APP_STORE_CONNECT_API_ISSUER_ID'],
+#   key_filepath: ENV['API_KEY_PATH'],
+# )
 
 platform :ios do
   desc "Push a new beta build to TestFlight"
@@ -29,24 +29,24 @@ platform :ios do
     upload_to_testflight
   end
 
-  desc "dowload certificates from the git"
-  lane :syncCertificates do
-    match(
-       api_key: api_key,
-       type: "development",
-       git_basic_authorization: Base64.strict_encode64(ENV["GIT_AUTHORIZATION"]),
-       keychain_password: ENV["MATCH_PASSWORD"]
-       )
-  end
+  # desc "dowload certificates from the git"
+  # lane :syncCertificates do
+  #   match(
+  #      api_key: api_key,
+  #      type: "development",
+  #      git_basic_authorization: Base64.strict_encode64(ENV["GIT_AUTHORIZATION"]),
+  #      keychain_password: ENV["MATCH_PASSWORD"]
+  #      )
+  # end
 
-  desc "Connect App Store connect by API"
-  lane :connectByAPI do
-    app_store_connect_api_key(
-      key_id: ENV['APP_STORE_CONNECT_API_KEY_ID'],
-      issuer_id: ENV['APP_STORE_CONNECT_API_ISSUER_ID'],
-      key_filepath: ENV['API_KEY_PATH'],
-    )
-  end
+  # desc "Connect App Store connect by API"
+  # lane :connectByAPI do
+  #   app_store_connect_api_key(
+  #     key_id: ENV['APP_STORE_CONNECT_API_KEY_ID'],
+  #     issuer_id: ENV['APP_STORE_CONNECT_API_ISSUER_ID'],
+  #     key_filepath: ENV['API_KEY_PATH'],
+  #   )
+  # end
 
   desc "Build and archive APP"
   lane :archive do
