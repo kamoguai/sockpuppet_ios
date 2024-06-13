@@ -7,7 +7,7 @@ on: push
   # pull_request:
   #   branches:
   #     - main
- 
+
 jobs:
   build:
     runs-on: macos-latest
@@ -26,6 +26,20 @@ jobs:
         export LC_ALL=en_US.UTF-8
         export LANG=en_US.UTF-8
         Bundle exec fastlane release_beta
+      env:
+        APP_STORE_CONNECT_API_ISSUER_ID: ${{secrets.APP_STORE_CONNECT_API_ISSUER_ID}}
+        APP_STORE_CONNECT_API_KEY_ID: ${{secrets.APP_STORE_CONNECT_API_KEY_ID}}
+        API_KEY_PATH: ${{secrets.API_KEY_PATH}}
+        APP_IDENTIFIER: ${{secrets.APP_IDENTIFIER}}
+        MATCH_PASSWORD: ${{secrets.MATCH_PASSWORD}}
+        FASTLANE_APPLE_ID: ${{secrets.FASTLANE_APPLE_ID}}
+        ITC_TEAM_ID: ${{secrets.ITC_TEAM_ID}}
+        DEVELOPER_PORTAL_TEAM_ID: ${{secrets.DEVELOPER_PORTAL_TEAM_ID}}
+        GIT_AUTHORIZATION: ${{secrets.GIT_AUTHORIZATION}}
+        APP_DISTRIBUTION_DEV: ${{secrets.APP_DISTRIBUTION_DEV}}
+        APP_DISTRIBUTION: ${{secrets.APP_DISTRIBUTION}}
+        SCHEME: ${{secrets.SCHEME}}
+        EXPORT_OUTPUT_DIRECTORY: ${{secrets.EXPORT_OUTPUT_DIRECTORY}}
 
     # - name: Run a signing Certificate p12 script
     #   uses: apple-actions/import-codesign-certs@v1
