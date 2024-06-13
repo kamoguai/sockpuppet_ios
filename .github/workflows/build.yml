@@ -1,56 +1,67 @@
 name: iOS Build
 
-on:
-  push:
-    branches:
-      - main # 當推送到 main 分支時觸發
-  pull_request:
-    branches:
-      - main
- 
+on: push
+  # push:
+  #   branches:
+  #     - main # 當推送到 main 分支時觸發
+  # pull_request:
+  #   branches:
+  #     - main
+
 jobs:
   build:
     runs-on: macos-latest
 
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
 
-    - name: Run a signing Certificate p12 script
-      uses: apple-actions/import-codesign-certs@v1
-      with: 
-        p12-file-base64: ${{ secrets.CERTIFICATES_P12 }}
-        p12-password: ${{ secrets.CERTIFICATES_P12_PASSWORD }}
-    - uses: Apple-Actions/download-provisioning-profiles@v1
+    - name: Setup Ruby
+      uses: ruby/setup-ruby@v1
       with:
-        bundle-id: com.webapp.testBuild
-        issuer-id: ${{ secrets.ISSUER_ID }}
-        api-key-id: ${{ secrets.KEY_ID }}
-        api-private-key: ${{ secrets.PRIVATE_KEY }}
-
-    - name: Install CocoaPods
-      run: bundle exec pod install
-      working-directory: ./SSGaming
-
-    - name: Build IPA
+        ruby-version: '3.3.3'
+        bundler-cache: true
+    - name: Build and distribute app
       run: |
-        xcodebuild clean archive \
-          -project SSGaming.xcodeproj \
-          -scheme SSGaming \
-          -archivePath $GITHUB_WORKSPACE/build/SSGaming.xcarchive \
-          -configuration Release \
-          -allowProvisioningUpdates \
-          CODE_SIGN_IDENTITY="iPhone Distribution" \
-          PROVISIONING_PROFILE_SPECIFIER="com.webapp.testBuild"
+        export LC_ALL=en_US.UTF-8
+        export LANG=en_US.UTF-8
+        Bundle exec fastlane release_beta
 
-        xcodebuild -exportArchive \
-          -archivePath $GITHUB_WORKSPACE/build/SSGaming.xcarchive \
-          -exportPath $GITHUB_WORKSPACE/build/ \
-          -exportOptionsPlist ./SSGaming/exportOptions.plist
-      working-directory: ./SSGaming
-
-    - name: Upload artifact
-      uses: actions/upload-artifact@v2
-      with:
-        name: ipa
-        path: $GITHUB_WORKSPACE/build/*.ipa
+    # - name: Run a signing Certificate p12 script
+    #   uses: apple-actions/import-codesign-certs@v1
+    #   with:
+    #     p12-file-base64: ${{ secrets.CERTIFICATES_P12 }}
+    #     p12-password: ${{ secrets.CERTIFICATES_P12_PASSWORD }}
+    # - uses: Apple-Actions/download-provisioning-profiles@v1
+    #   with:
+    #     bundle-id: com.webapp.testBuild
+    #     issuer-id: ${{ secrets.ISSUER_ID }}
+    #     api-key-id: ${{ secrets.KEY_ID }}
+    #     api-private-key: ${{ secrets.PRIVATE_KEY }}
+    #
+    # - name: Install CocoaPods
+    #   run: bundle exec pod install
+    #   working-directory: ./SSGaming
+    #
+    # - name: Build IPA
+    #   run: |
+    #     xcodebuild clean archive \
+    #       -project SSGaming.xcodeproj \
+    #       -scheme SSGaming \
+    #       -archivePath $GITHUB_WORKSPACE/build/SSGaming.xcarchive \
+    #       -configuration Release \
+    #       -allowProvisioningUpdates \
+    #       CODE_SIGN_IDENTITY="iPhone Distribution" \
+    #       PROVISIONING_PROFILE_SPECIFIER="com.webapp.testBuild"
+    #
+    #     xcodebuild -exportArchive \
+    #       -archivePath $GITHUB_WORKSPACE/build/SSGaming.xcarchive \
+    #       -exportPath $GITHUB_WORKSPACE/build/ \
+    #       -exportOptionsPlist ./SSGaming/exportOptions.plist
+    #   working-directory: ./SSGaming
+    #
+    # - name: Upload artifact
+    #   uses: actions/upload-artifact@v2
+    #   with:
+    #     name: ipa
+    #     path: $GITHUB_WORKSPACE/build/*.ipa
