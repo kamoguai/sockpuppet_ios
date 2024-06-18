@@ -7,6 +7,9 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        if let hn = Bundle.main.getInfoPlistValue(forKey: "HostName"){
+            print(hn)
+        }
         setupWebView()
     
     }

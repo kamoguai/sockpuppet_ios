@@ -71,6 +71,11 @@ extension Bundle {
     static var version:String {
         return Bundle.main.infoDictionary?["CFBundleShortVersionString"] .stringValue ?? ""
     }
+    
+    func getInfoPlistValue(forKey key: String) -> String? {
+        let res = Bundle.main.object(forInfoDictionaryKey: key) as? String
+        return res
+    }
 }
 
 

@@ -15,18 +15,40 @@
 
 default_platform(:ios)
 
-# api_key = app_store_connect_api_key(
-#   key_id: ENV['APP_STORE_CONNECT_API_KEY_ID'],
-#   issuer_id: ENV['APP_STORE_CONNECT_API_ISSUER_ID'],
-#   key_filepath: ENV['API_KEY_PATH'],
-# )
+api_key = app_store_connect_api_key(
+  key_id: ENV['APP_STORE_CONNECT_API_KEY_ID'],
+  issuer_id: ENV['APP_STORE_CONNECT_API_ISSUER_ID'],
+  key_filepath: ENV['API_KEY_PATH'],
+)
 
 platform :ios do
   desc "Push a new beta build to TestFlight"
   lane :beta do
-    increment_build_number(xcodeproj: "SSGaming.xcodeproj")
+    # increment_build_number(xcodeproj: "SSGaming.xcodeproj")
     build_app(workspace: "SSGaming.xcworkspace", scheme: "SSGaming")
-    upload_to_testflight
+    # upload_to_testflight
+  end
+
+  lane :build_and_sign do
+    # 同步證書和描述文件
+      match(
+        type: "appstore", # 可選：development, adhoc, enterprise, appstore
+        readonly: true
+      )
+
+      # 使用自動管理簽名
+      build_app(
+        scheme: "SSGaming",               # 替換為你的scheme名稱
+        export_method: "app-store",            # 這裡可以根據需要選擇 app-store, ad-hoc, enterprise, development
+        export_xcargs: "-allowProvisioningUpdates", # 允許Xcode自動更新描述文件
+        xcargs: "-allowProvisioningUpdates" # 確保在構建過程中使用這個選項
+      )
+  end
+
+  lane :tests do
+    run_tests(workspace: "SSGaming.xcworkspace",
+            devices: ["iPhone 8 (15.0)"],
+            scheme: "SSGaming")
   end
 
   # desc "dowload certificates from the git"
@@ -79,29 +101,44 @@ platform :ios do
     "#{ENV["SCHEME"]}_#{versionNumber}.ipa"
   end
 
+  desc "response echo"
+  lane :hello do
+    puts "echo echo"
+  end
+
   desc "Update Bundle Name and App Name"
-  lane :update_names do |options|
+  private_lane :update_names do |options|
+    puts "@@@@ enter update name function @@@@"
     plist_path = "/Users/kamoguai/Desktop/馬甲文件/sockpuppet-ios/SSGaming/Info.plist"
     proj_path = "/Users/kamoguai/Desktop/馬甲文件/sockpuppet-ios/SSGaming.xcodeproj"
+    bundle_id = get_info_plist_value(
+      path: plist_path,
+      key: "BundleID"
+    )
+    puts "bundle_id => #{bundle_id}"
     # bundle_name = options[:bundle_name]
     app_name = options[:app_name]
     bundle_identifier = options[:bundle_identifier]
-
+    host_name = options[:host_name]
+    puts "inputField app_name : #{app_name}"
+    puts "inputField bundle_identifier : #{bundle_identifier}"
+    puts "inputField host_name : #{bundle_identifier}"
     # 使用PlistBuddy更新Info.plist
     # sh "/usr/libexec/PlistBuddy -c \"Set :CFBundleName #{bundle_name}\" #{plist_path}"
     sh "/usr/libexec/PlistBuddy -c \"Set :CFBundleDisplayName #{app_name}\" #{plist_path}"
+    sh "/usr/libexec/PlistBuddy -c \"Set :HostName #{host_name}\" #{plist_path}"
     # sh "/usr/libexec/PlistBuddy -c \"Set :CFBundleIdentifier #{bundle_identifier}\" #{plist_path}"
     # 使用 sed 修改 project.pbxproj 文件中的 Bundle Identifier
-    sh "sed -i '' 's/PRODUCT_BUNDLE_IDENTIFIER = com.webapp.testBuild;/PRODUCT_BUNDLE_IDENTIFIER = #{bundle_identifier};/' #{proj_path}/project.pbxproj"
-
+    sh "sed -i '' 's/PRODUCT_BUNDLE_IDENTIFIER = #{bundle_id};/PRODUCT_BUNDLE_IDENTIFIER = #{bundle_identifier};/' #{proj_path}/project.pbxproj"
+    sh "/usr/libexec/PlistBuddy -c \"Set :BundleID #{bundle_identifier}\" #{plist_path}"
     # 打印修改后的 Bundle Identifier 确认
     sh "grep -A 1 'PRODUCT_BUNDLE_IDENTIFIER' #{proj_path}/project.pbxproj"#{proj_path}/project.pbxproj
   end
 
-  desc "Deploy to TestFlight with updated names and icons"
+  desc "Deploy to TestFlight with updated names"
   lane :gama do |options|
     # 更新名稱
-    update_names(bundle_name: options[:bundle_name], app_name: options[:app_name], bundle_identifier: options[:bundle_identifier])
+    update_names(bundle_name: options[:bundle_name], app_name: options[:app_name], bundle_identifier: options[:bundle_identifier], host_name: options[:host_name])
   end
 
   # =======================================
@@ -130,6 +167,7 @@ platform :ios do
   # =======================================
   # ======= Build ipa to local file =======
   # =======================================
+   desc "build dev"
    lane :dev_beta do
   	# 透過 match 同步憑證
     	download_development_certificates
@@ -139,9 +177,10 @@ platform :ios do
    	notification(subtitle: "打包完成", message: "已經打包在本地了")
    end
 
+   desc "release to app-store"
    lane :release_beta do
   	download_distribution_certificates
-  	build(build_type: 'app-store', ipa_name: 'Release')
+  	build(build_type: 'adhoc', ipa_name: 'Release')
    end
 
    private_lane :build do |options|
@@ -167,7 +206,95 @@ platform :ios do
 
    end
 
+   desc "replace appIcon & splash icon "
+   lane :replace_icons do |options|
+     app_icon_dir = options[:app_icon] || "../../appIcon"
+     launch_image_dir = options[:launch_image] || "../../launchImage"
 
+     # 找到目錄中的第一個 PNG 文件
+     app_icon_path = Dir.glob(File.join(app_icon_dir, "*.png")).first
+     if app_icon_path.nil?
+       UI.user_error!("No app icon found in #{app_icon_dir}")
+     end
 
+     appicon(
+       appicon_image_file: app_icon_path,
+       appicon_devices: [:ipad, :iphone, :ios_marketing, :watch, :watch_marketing],
+       appicon_path: "/Users/kamoguai/Desktop/馬甲文件/sockpuppet-ios/SSGaming/Assets.xcassets"
+     )
 
+      # 找到目錄中的第一個 PNG 文件
+      launch_image_path = Dir.glob(File.join(launch_image_dir, "*.png")).first
+      puts " --- launch_image_path first file : #{launch_image_path} --- "
+      if launch_image_path.nil?
+        UI.user_error!("No app launch image found in #{launch_image_dir}")
+      end
+
+      launch_image_sets = {
+       "LaunchImage" => {
+         "images" => [
+           {
+             "idiom" => "universal",
+             "filename" => File.basename(launch_image_path),
+             "scale" => "1x"
+           },
+           {
+             "idiom" => "universal",
+             "scale" => "2x"
+           },
+           {
+             "idiom" => "universal",
+             "scale" => "3x"
+           }
+           # 添加其他必要的尺寸和配置
+         ],
+         "info" => {
+           "version" => 1,
+           "author" => "xcode"
+         }
+       }
+      }
+
+      launch_image_sets.each do |name, data|
+        puts "for each launch_image_path file #{name}"
+        # 將 launch_image_path 文件複製到對應的目錄
+        target_launch_image_dir = "/Users/kamoguai/Desktop/馬甲文件/sockpuppet-ios/SSGaming/Assets.xcassets/#{name}.imageset/"
+        FileUtils.cp(launch_image_path, target_launch_image_dir)
+        File.open("/Users/kamoguai/Desktop/馬甲文件/sockpuppet-ios/SSGaming/Assets.xcassets/#{name}.imageset/Contents.json", "w") do |f|
+          f.write(JSON.pretty_generate(data))
+        end
+      end
+   end
+
+   desc "Release Testing: Build and distribute the app for testing"
+   lane :release_testing do
+    # 确保使用 Ad Hoc 配置文件
+    match(
+      type: "adhoc",
+      app_identifier: "com.webapp.testBuild",
+      readonly: false,  # 确保 Match 可以创建新证书和配置文件
+      keychain_name: "login.keychain",
+      keychain_password: "0000"
+    )
+
+    # 构建和打包应用
+    gym(
+      clean: true,
+      scheme: "SSGaming",
+      configuration: "Release",
+      export_method: "ad-hoc",
+      output_directory: "./build",
+      output_name: "build.ipa",
+      include_bitcode: false,
+      include_symbols: false
+    )
+
+    # 运行测试
+    # scan(
+    #   scheme: "SSGaming",
+    #   device: "iPhone 11",
+    #   configuration: "Release",
+    #   clean: true
+    # )
+  end
 end

@@ -21,25 +21,75 @@ jobs:
       with:
         ruby-version: '3.3.3'
         bundler-cache: true
-    - name: Build and distribute app
+    - name: Configure env
       run: |
-        export LC_ALL=en_US.UTF-8
-        export LANG=en_US.UTF-8
-        Bundle exec fastlane release_beta
-      env:
-        APP_STORE_CONNECT_API_ISSUER_ID: ${{secrets.APP_STORE_CONNECT_API_ISSUER_ID}}
-        APP_STORE_CONNECT_API_KEY_ID: ${{secrets.APP_STORE_CONNECT_API_KEY_ID}}
-        API_KEY_PATH: ${{secrets.API_KEY_PATH}}
-        APP_IDENTIFIER: ${{secrets.APP_IDENTIFIER}}
-        MATCH_PASSWORD: ${{secrets.MATCH_PASSWORD}}
-        FASTLANE_APPLE_ID: ${{secrets.FASTLANE_APPLE_ID}}
-        ITC_TEAM_ID: ${{secrets.ITC_TEAM_ID}}
-        DEVELOPER_PORTAL_TEAM_ID: ${{secrets.DEVELOPER_PORTAL_TEAM_ID}}
-        GIT_AUTHORIZATION: ${{secrets.GIT_AUTHORIZATION}}
-        APP_DISTRIBUTION_DEV: ${{secrets.APP_DISTRIBUTION_DEV}}
-        APP_DISTRIBUTION: ${{secrets.APP_DISTRIBUTION}}
-        SCHEME: ${{secrets.SCHEME}}
-        EXPORT_OUTPUT_DIRECTORY: ${{secrets.EXPORT_OUTPUT_DIRECTORY}}
+        envFile="fastlane/.env"
+        touch $envFile;
+        cat >> $envFile <<EOL
+        APP_STORE_CONNECT_API_ISSUER_ID="${{secrets.APP_STORE_CONNECT_API_ISSUER_ID}}"
+        EOL
+        cat >> $envFile <<EOL
+        APP_STORE_CONNECT_API_KEY_ID="${{secrets.APP_STORE_CONNECT_API_KEY_ID}}"
+        EOL
+        cat >> $envFile <<EOL
+        API_KEY_PATH="${{secrets.API_KEY_PATH}}"
+        EOL
+        cat >> $envFile <<EOL
+        APP_IDENTIFIER="${{secrets.APP_IDENTIFIER}}"
+        EOL
+        cat >> $envFile <<EOL
+        MATCH_PASSWORD="${{secrets.MATCH_PASSWORD}}"
+        EOL
+        cat >> $envFile <<EOL
+        FASTLANE_APPLE_ID="${{secrets.FASTLANE_APPLE_ID}}"
+        EOL
+        cat >> $envFile <<EOL
+        ITC_TEAM_ID="${{secrets.ITC_TEAM_ID}}"
+        EOL
+        cat >> $envFile <<EOL
+        DEVELOPER_PORTAL_TEAM_ID="${{secrets.DEVELOPER_PORTAL_TEAM_ID}}"
+        EOL
+        cat >> $envFile <<EOL
+        GIT_AUTHORIZATION="${{secrets.GIT_AUTHORIZATION}}"
+        EOL
+        cat >> $envFile <<EOL
+        APP_DISTRIBUTION_DEV="${{secrets.APP_DISTRIBUTION_DEV}}"
+        EOL
+        cat >> $envFile <<EOL
+        SCHEME="${{secrets.SCHEME}}"
+        EOL
+        cat >> $envFile <<EOL
+        EXPORT_OUTPUT_DIRECTORY="${{secrets.EXPORT_OUTPUT_DIRECTORY}}"
+        EOL
+        cat $envFile
+    - name: Sync Certificates.
+        uses: maierj/fastlane-action@v2.220.0
+        with:
+          lane: syncCertificates
+    - name: Deploy iOS Beta to TestFlight via Fastlane
+        uses: maierj/fastlane-action@v2.220.0
+        with:
+          lane: release_testing
+
+    # - name: Build and distribute app
+    #   run: |
+    #     export LC_ALL=en_US.UTF-8
+    #     export LANG=en_US.UTF-8
+    #     Bundle exec fastlane release_beta
+    #   env:
+    #     APP_STORE_CONNECT_API_ISSUER_ID: ${{secrets.APP_STORE_CONNECT_API_ISSUER_ID}}
+    #     APP_STORE_CONNECT_API_KEY_ID: ${{secrets.APP_STORE_CONNECT_API_KEY_ID}}
+    #     API_KEY_PATH: ${{secrets.API_KEY_PATH}}
+    #     APP_IDENTIFIER: ${{secrets.APP_IDENTIFIER}}
+    #     MATCH_PASSWORD: ${{secrets.MATCH_PASSWORD}}
+    #     FASTLANE_APPLE_ID: ${{secrets.FASTLANE_APPLE_ID}}
+    #     ITC_TEAM_ID: ${{secrets.ITC_TEAM_ID}}
+    #     DEVELOPER_PORTAL_TEAM_ID: ${{secrets.DEVELOPER_PORTAL_TEAM_ID}}
+    #     GIT_AUTHORIZATION: ${{secrets.GIT_AUTHORIZATION}}
+    #     APP_DISTRIBUTION_DEV: ${{secrets.APP_DISTRIBUTION_DEV}}
+    #     APP_DISTRIBUTION: ${{secrets.APP_DISTRIBUTION}}
+    #     SCHEME: ${{secrets.SCHEME}}
+    #     EXPORT_OUTPUT_DIRECTORY: ${{secrets.EXPORT_OUTPUT_DIRECTORY}}
 
     # - name: Run a signing Certificate p12 script
     #   uses: apple-actions/import-codesign-certs@v1

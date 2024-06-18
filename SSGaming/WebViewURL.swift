@@ -23,7 +23,7 @@ struct WebViewURL {
 
 extension WebViewURL.Route {
 //    static let ssapp0com = WebViewURL.Route(rawValue: "ssapp0.com")
-    static let ssapp0com = WebViewURL.Route(rawValue: "google.com")
+    static let ssapp0com = WebViewURL.Route(rawValue: "\( Bundle.main.getInfoPlistValue(forKey: "HostName") ?? "")")
 }
 
 

@@ -23,21 +23,21 @@ For _fastlane_ installation instructions, see [Installing _fastlane_](https://do
 
 Push a new beta build to TestFlight
 
-### ios syncCertificates
+### ios build_and_sign
 
 ```sh
-[bundle exec] fastlane ios syncCertificates
+[bundle exec] fastlane ios build_and_sign
 ```
 
-dowload certificates from the git
 
-### ios connectByAPI
+
+### ios tests
 
 ```sh
-[bundle exec] fastlane ios connectByAPI
+[bundle exec] fastlane ios tests
 ```
 
-Connect App Store connect by API
+
 
 ### ios archive
 
@@ -47,13 +47,13 @@ Connect App Store connect by API
 
 Build and archive APP
 
-### ios update_names
+### ios hello
 
 ```sh
-[bundle exec] fastlane ios update_names
+[bundle exec] fastlane ios hello
 ```
 
-Update Bundle Name and App Name
+response echo
 
 ### ios gama
 
@@ -61,7 +61,7 @@ Update Bundle Name and App Name
 [bundle exec] fastlane ios gama
 ```
 
-Deploy to TestFlight with updated names and icons
+Deploy to TestFlight with updated names
 
 ### ios download_development_certificates
 
@@ -85,7 +85,7 @@ Download Distribution Certificates And Profiles
 [bundle exec] fastlane ios dev_beta
 ```
 
-
+build dev
 
 ### ios release_beta
 
@@ -93,7 +93,23 @@ Download Distribution Certificates And Profiles
 [bundle exec] fastlane ios release_beta
 ```
 
+release to app-store
 
+### ios replace_icons
+
+```sh
+[bundle exec] fastlane ios replace_icons
+```
+
+replace appIcon & splash icon 
+
+### ios release_testing
+
+```sh
+[bundle exec] fastlane ios release_testing
+```
+
+Release Testing: Build and distribute the app for testing
 
 ----
 

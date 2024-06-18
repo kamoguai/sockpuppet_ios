@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		0C417F9128C2652300F2E37B /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 0C417F9028C2652300F2E37B /* Settings.bundle */; };
 		0C417F9528C2659F00F2E37B /* UserDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C417F9428C2659F00F2E37B /* UserDefault.swift */; };
-		0C6C1AD625CB86C700FF03E5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0C6C1AD525CB86C700FF03E5 /* Assets.xcassets */; };
 		0C6C1AD925CB86C700FF03E5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0C6C1AD725CB86C700FF03E5 /* LaunchScreen.storyboard */; };
 		0C6C1AE925CB875500FF03E5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0C6C1AE025CB875400FF03E5 /* Main.storyboard */; };
 		0C6C1AEA25CB875500FF03E5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C6C1AE125CB875400FF03E5 /* AppDelegate.swift */; };
@@ -30,6 +29,7 @@
 		35A7DD2E2B3AC40900E6ECB2 /* URLSessionConfiguration+HttpProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35A7DD2D2B3AC40900E6ECB2 /* URLSessionConfiguration+HttpProxy.swift */; };
 		35A7DD332B3AC61100E6ECB2 /* NSURLRequest+ProxyCanonicalRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 35A7DD302B3AC61100E6ECB2 /* NSURLRequest+ProxyCanonicalRequest.m */; };
 		35A7DD392B3AD09C00E6ECB2 /* ------ Config ------.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35A7DD382B3AD09C00E6ECB2 /* ------ Config ------.swift */; };
+		35E0FF9B2C203440004E81D4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 35E0FF9A2C203440004E81D4 /* Assets.xcassets */; };
 		47BB1A71D3B3D37734EF9D6C /* Pods_SSGaming.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D843F99FBE6DEDD73B4D9439 /* Pods_SSGaming.framework */; };
 /* End PBXBuildFile section */
 
@@ -37,7 +37,6 @@
 		0C417F9028C2652300F2E37B /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		0C417F9428C2659F00F2E37B /* UserDefault.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefault.swift; sourceTree = "<group>"; };
 		0C6C1AC925CB86C400FF03E5 /* SSGaming.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SSGaming.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		0C6C1AD525CB86C700FF03E5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0C6C1AD825CB86C700FF03E5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0C6C1ADA25CB86C700FF03E5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0C6C1AE025CB875400FF03E5 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
@@ -62,6 +61,7 @@
 		35A7DD312B3AC61100E6ECB2 /* SSGaming-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SSGaming-Bridging-Header.h"; sourceTree = "<group>"; };
 		35A7DD322B3AC61100E6ECB2 /* NSURLRequest+ProxyCanonicalRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURLRequest+ProxyCanonicalRequest.h"; sourceTree = "<group>"; };
 		35A7DD382B3AD09C00E6ECB2 /* ------ Config ------.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "------ Config ------.swift"; sourceTree = "<group>"; };
+		35E0FF9A2C203440004E81D4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D843F99FBE6DEDD73B4D9439 /* Pods_SSGaming.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SSGaming.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -99,6 +99,7 @@
 		0C6C1ACB25CB86C400FF03E5 /* SSGaming */ = {
 			isa = PBXGroup;
 			children = (
+				35E0FF9A2C203440004E81D4 /* Assets.xcassets */,
 				35A7DD312B3AC61100E6ECB2 /* SSGaming-Bridging-Header.h */,
 				35A7DD322B3AC61100E6ECB2 /* NSURLRequest+ProxyCanonicalRequest.h */,
 				35A7DD302B3AC61100E6ECB2 /* NSURLRequest+ProxyCanonicalRequest.m */,
@@ -116,7 +117,6 @@
 				0CB571FE28A0EBB600D48F5F /* UIColor+Extension.swift */,
 				0CA05F402892729100F2F552 /* WKWebView+Extension.swift */,
 				0C417F9028C2652300F2E37B /* Settings.bundle */,
-				0C6C1AD525CB86C700FF03E5 /* Assets.xcassets */,
 				0C6C1AD725CB86C700FF03E5 /* LaunchScreen.storyboard */,
 				0C6C1ADA25CB86C700FF03E5 /* Info.plist */,
 				35A7DD272B3AC30700E6ECB2 /* HttpProxyHandler.swift */,
@@ -215,7 +215,7 @@
 				0C6C1AE925CB875500FF03E5 /* Main.storyboard in Resources */,
 				0C417F9128C2652300F2E37B /* Settings.bundle in Resources */,
 				0C6C1AD925CB86C700FF03E5 /* LaunchScreen.storyboard in Resources */,
-				0C6C1AD625CB86C700FF03E5 /* Assets.xcassets in Resources */,
+				35E0FF9B2C203440004E81D4 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -407,12 +407,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "Apple Development: TUNG WEI YANG (FN968N2HFT)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Development: TUNG WEI YANG (FN968N2HFT)";
-				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 2406131347;
-				DEVELOPMENT_TEAM = "";
-				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = Q8C88B8UL7;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 2406181559;
+				DEVELOPMENT_TEAM = Q8C88B8UL7;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = SSGaming/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
@@ -424,7 +422,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.webapp.testBuild;
 				PRODUCT_NAME = SSGaming;
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "match Development com.webapp.testBuild";
 				SWIFT_OBJC_BRIDGING_HEADER = "SSGaming/SSGaming-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -439,13 +436,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: TUNG WEI YANG (Q8C88B8UL7)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: TUNG WEI YANG (Q8C88B8UL7)";
-				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 2406131347;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 2406181559;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = "";
-				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = Q8C88B8UL7;
+				DEVELOPMENT_TEAM = Q8C88B8UL7;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = SSGaming/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
@@ -457,7 +452,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.webapp.testBuild;
 				PRODUCT_NAME = SSGaming;
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "match AppStore com.webapp.testBuild";
 				SWIFT_OBJC_BRIDGING_HEADER = "SSGaming/SSGaming-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;

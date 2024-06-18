@@ -1,14 +1,200 @@
 {
-  "images" : [
+  "images": [
     {
-      "filename" : "ssgaming-1024.png",
-      "idiom" : "universal",
-      "platform" : "ios",
-      "size" : "1024x1024"
+      "idiom": "watch-marketing",
+      "filename": "dg852-1024-1024x1024.png",
+      "scale": "1x",
+      "size": "1024x1024"
+    },
+    {
+      "idiom": "ios-marketing",
+      "filename": "dg852-1024-1024x1024.png",
+      "scale": "1x",
+      "size": "1024x1024"
+    },
+    {
+      "idiom": "watch",
+      "filename": "dg852-1024-216x216.png",
+      "scale": "2x",
+      "size": "108x108",
+      "role": "quickLook",
+      "subtype": "44mm"
+    },
+    {
+      "idiom": "watch",
+      "filename": "dg852-1024-196x196.png",
+      "scale": "2x",
+      "size": "98x98",
+      "role": "quickLook",
+      "subtype": "42mm"
+    },
+    {
+      "idiom": "iphone",
+      "filename": "dg852-1024-180x180.png",
+      "scale": "3x",
+      "size": "60x60"
+    },
+    {
+      "idiom": "watch",
+      "filename": "dg852-1024-172x172.png",
+      "scale": "2x",
+      "size": "86x86",
+      "role": "quickLook",
+      "subtype": "38mm"
+    },
+    {
+      "idiom": "ipad",
+      "filename": "dg852-1024-167x167.png",
+      "scale": "2x",
+      "size": "83.5x83.5"
+    },
+    {
+      "idiom": "ipad",
+      "filename": "dg852-1024-152x152.png",
+      "scale": "2x",
+      "size": "76x76"
+    },
+    {
+      "idiom": "iphone",
+      "filename": "dg852-1024-120x120.png",
+      "scale": "2x",
+      "size": "60x60"
+    },
+    {
+      "idiom": "iphone",
+      "filename": "dg852-1024-120x120.png",
+      "scale": "3x",
+      "size": "40x40"
+    },
+    {
+      "idiom": "watch",
+      "filename": "dg852-1024-100x100.png",
+      "scale": "2x",
+      "size": "50x50",
+      "role": "appLauncher",
+      "subtype": "44mm"
+    },
+    {
+      "idiom": "watch",
+      "filename": "dg852-1024-88x88.png",
+      "scale": "2x",
+      "size": "44x44",
+      "role": "appLauncher",
+      "subtype": "40mm"
+    },
+    {
+      "idiom": "iphone",
+      "filename": "dg852-1024-87x87.png",
+      "scale": "3x",
+      "size": "29x29"
+    },
+    {
+      "idiom": "watch",
+      "filename": "dg852-1024-87x87.png",
+      "scale": "3x",
+      "size": "29x29",
+      "role": "companionSettings"
+    },
+    {
+      "idiom": "iphone",
+      "filename": "dg852-1024-80x80.png",
+      "scale": "2x",
+      "size": "40x40"
+    },
+    {
+      "idiom": "watch",
+      "filename": "dg852-1024-80x80.png",
+      "scale": "2x",
+      "size": "40x40",
+      "role": "appLauncher",
+      "subtype": "38mm"
+    },
+    {
+      "idiom": "ipad",
+      "filename": "dg852-1024-80x80.png",
+      "scale": "2x",
+      "size": "40x40"
+    },
+    {
+      "idiom": "ipad",
+      "filename": "dg852-1024-76x76.png",
+      "scale": "1x",
+      "size": "76x76"
+    },
+    {
+      "idiom": "iphone",
+      "filename": "dg852-1024-60x60.png",
+      "scale": "3x",
+      "size": "20x20"
+    },
+    {
+      "idiom": "watch",
+      "filename": "dg852-1024-58x58.png",
+      "scale": "2x",
+      "size": "29x29",
+      "role": "companionSettings"
+    },
+    {
+      "idiom": "iphone",
+      "filename": "dg852-1024-58x58.png",
+      "scale": "2x",
+      "size": "29x29"
+    },
+    {
+      "idiom": "ipad",
+      "filename": "dg852-1024-58x58.png",
+      "scale": "2x",
+      "size": "29x29"
+    },
+    {
+      "idiom": "watch",
+      "filename": "dg852-1024-55x55.png",
+      "scale": "2x",
+      "size": "27.5x27.5",
+      "role": "notificationCenter",
+      "subtype": "42mm"
+    },
+    {
+      "idiom": "watch",
+      "filename": "dg852-1024-48x48.png",
+      "scale": "2x",
+      "size": "24x24",
+      "role": "notificationCenter",
+      "subtype": "38mm"
+    },
+    {
+      "idiom": "iphone",
+      "filename": "dg852-1024-40x40.png",
+      "scale": "2x",
+      "size": "20x20"
+    },
+    {
+      "idiom": "ipad",
+      "filename": "dg852-1024-40x40.png",
+      "scale": "2x",
+      "size": "20x20"
+    },
+    {
+      "idiom": "ipad",
+      "filename": "dg852-1024-40x40.png",
+      "scale": "1x",
+      "size": "40x40"
+    },
+    {
+      "idiom": "ipad",
+      "filename": "dg852-1024-29x29.png",
+      "scale": "1x",
+      "size": "29x29"
+    },
+    {
+      "idiom": "ipad",
+      "filename": "dg852-1024-20x20.png",
+      "scale": "1x",
+      "size": "20x20"
     }
   ],
-  "info" : {
-    "author" : "xcode",
-    "version" : 1
+  "info": {
+    "version": 1,
+    "author": "fastlane"
   }
 }
