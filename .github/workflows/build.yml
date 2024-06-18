@@ -22,8 +22,15 @@ jobs:
         ruby-version: '3.3.3'
         bundler-cache: true
 
-    - name: Install Fastlane
-      run: sudo gem install fastlane -NV
+    - name: Set up SSH
+      run: |
+        mkdir -p ~/.ssh
+        echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+        chmod 600 ~/.ssh/id_rsa
+        ssh-keyscan github.com >> ~/.ssh/known_hosts
+
+    - name: Clone repository
+      run: git clone git@github.com:kamoguai/ios_certificate.git
 
     - name: Configure env
       run: |
