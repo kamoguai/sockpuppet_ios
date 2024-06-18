@@ -268,6 +268,7 @@ platform :ios do
 
    desc "Release Testing: Build and distribute the app for testing"
    lane :release_testing do
+    puts "@@@ fastlane action release_testing is start @@@"
     # 确保使用 Ad Hoc 配置文件
     match(
       type: "adhoc",
