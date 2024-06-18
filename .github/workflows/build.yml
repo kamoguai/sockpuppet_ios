@@ -21,6 +21,10 @@ jobs:
       with:
         ruby-version: '3.3.3'
         bundler-cache: true
+
+    - name: Install Fastlane
+      run: sudo gem install fastlane -NV
+
     - name: Configure env
       run: |
         envFile="fastlane/.env"
@@ -62,10 +66,10 @@ jobs:
         EXPORT_OUTPUT_DIRECTORY="${{secrets.EXPORT_OUTPUT_DIRECTORY}}"
         EOL
         cat $envFile
-    - name: Sync Certificates.
-        uses: maierj/fastlane-action@v3.1.0
-        with:
-          lane: syncCertificates
+    # - name: Sync Certificates.
+    #     uses: maierj/fastlane-action@v3.1.0
+    #     with:
+    #       lane: syncCertificates
     - name: Deploy iOS Beta to TestFlight via Fastlane
         uses: maierj/fastlane-action@v3.1.0
         with:
