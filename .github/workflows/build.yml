@@ -24,13 +24,15 @@ jobs:
         ruby-version: '3.3.3'
         bundler-cache: true
 
-    - name: Reconfigure git to use HTTP authentication
-      run: >
-        git config --global url."https://github.com/".insteadOf
-        ssh://git@github.com/
+    - name: Set up SSH
+      run: |
+        mkdir -p ~/.ssh
+        echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/rsa_github_depkey
+        chmod 600 ~/.ssh/rsa_github_depkey
+        ssh-keyscan github.com >> ~/.ssh/known_hosts
 
-#    - name: Clone repository
-#      run: git clone git@github.com:kamoguai/ios_certificate.git
+    - name: Clone repository
+      run: git clone git@github.com:kamoguai/ios_certificate.git
 
     - name: Configure env
       run: |
