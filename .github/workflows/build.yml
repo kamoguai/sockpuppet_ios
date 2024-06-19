@@ -7,7 +7,7 @@ on: push
   # pull_request:
   #   branches:
   #     - main
- 
+
 jobs:
   build:
     runs-on: macos-latest
@@ -24,15 +24,22 @@ jobs:
         ruby-version: '3.3.3'
         bundler-cache: true
 
-    - name: Set up SSH
-      run: |
-        mkdir -p ~/.ssh
-        echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/rsa_github_depkey
-        chmod 600 ~/.ssh/rsa_github_depkey
-        ssh-keyscan github.com >> ~/.ssh/known_hosts
+    # - name: Set up SSH
+    #   run: |
+    #     mkdir -p ~/.ssh
+    #     echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/rsa_github_depkey
+    #     chmod 600 ~/.ssh/rsa_github_depkey
+    #     ssh-keyscan github.com >> ~/.ssh/known_hosts
+    #
+    # - name: Clone repository
+    #   run: git clone git@github.com:kamoguai/ios_certificate.git
 
-    - name: Clone repository
-      run: git clone git@github.com:kamoguai/ios_certificate.git
+    - name: Checkout private repository
+      uses: actions/checkout@v3
+      with:
+        repository: kamoguai/ios_certificate
+        token: ${{ secrets.GITHUB_TOKEN }}
+        path: ios_certificate
 
     - name: Configure env
       run: |
