@@ -72,6 +72,7 @@ platform :ios do
 
   desc "Build and archive APP"
   lane :archive do
+    xcode_select("/Applications/Xcode_15.3.app")
     # update_code_signing_settings(
     #   path: "#{ENV['SCHEME']}.xcodeproj",
     #   team_id:ENV["DEVELOPER_PORTAL_TEAM_ID"],
